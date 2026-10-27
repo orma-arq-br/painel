@@ -9,9 +9,11 @@
   // Cloudflare creates the DNS record and certificate on deploy; orma.arq.br
   // has to be a zone on the same Cloudflare account.
   "routes": [{ "pattern": "painel.orma.arq.br", "custom_domain": true }],
-  // From the Google Cloud console (APIs & Services → Credentials). Set with
-  // `wrangler secret put` in production and in .dev.vars locally.
-  "secrets": { "required": ["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET"] },
+  // Secrets (GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET) are deliberately not
+  // listed under "secrets.required": Wrangler then refuses a Worker's very first
+  // deploy, before there is a Worker to set them on. They are typed in
+  // src/env.d.ts instead, and set in the dashboard (Settings → Variables and
+  // secrets) and in .dev.vars locally.
   "d1_databases": [
     {
       "binding": "DB",

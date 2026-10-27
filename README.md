@@ -19,7 +19,7 @@ Cloudflare builds and publishes every push to `main` (Workers Builds, connected 
 
 The first deploy creates the `orma-painel` D1 database by itself. Two things are set by hand, once:
 
-1. **Secrets**: in the Worker's **Settings → Variables and secrets**, add `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` (type _Secret_).
+1. **Secrets** (after the first deploy, once the Worker exists): in the Worker's **Settings → Variables and secrets**, add `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` (type _Secret_).
 2. **Google OAuth client**: authorized redirect URIs `http://localhost:3000/auth/google/callback` and `https://painel.orma.arq.br/auth/google/callback`. Its consent screen links to https://orma.arq.br/painel/privacidade and https://orma.arq.br/painel/termos.
 
 To publish by hand instead: `pnpm build && pnpm release`.
