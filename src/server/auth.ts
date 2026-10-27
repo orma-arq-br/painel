@@ -81,6 +81,14 @@ const hashToken = async (token: string) =>
  * cookies and returns the Google URL to send the browser to.
  */
 export async function startGoogleLogin() {
+  // Missing secrets would otherwise send Google `client_id=undefined`, and the
+  // only symptom would be Google's own "OAuth client not found" page.
+  if (!env.GOOGLE_CLIENT_ID || !env.GOOGLE_CLIENT_SECRET) {
+    throw new Error(
+      "GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET are not set on this Worker (Settings → Variables and Secrets)",
+    )
+  }
+
   const url = getRequestUrl()
   const state = randomToken()
   const verifier = randomToken()

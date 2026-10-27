@@ -1,8 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  // Must match the Worker project Cloudflare's GitHub integration deploys
-  // into. A different name makes every build publish a second Worker
-  // alongside it, one without the secrets set in the dashboard.
+  // The Worker project Cloudflare's GitHub integration deploys into. In those
+  // builds Wrangler uses the project's name regardless; keeping the two equal
+  // means a deploy by hand lands in the same Worker.
   "name": "painel",
   "main": "@tanstack/react-start/server-entry",
   "compatibility_date": "2026-10-20",
@@ -20,14 +20,12 @@
   "d1_databases": [
     {
       "binding": "DB",
-      // Found by name, so no database_id. Created by hand once, BEFORE the
-      // first deploy, with `wrangler d1 create orma-painel --location enam`
-      // (or in the dashboard, choosing Eastern North America). If a deploy
-      // finds no database it creates one itself, but without a location hint,
-      // and Cloudflare then puts it wherever the build happened to run
-      // (it once landed in Asia Pacific). There is no South American region;
-      // Eastern North America is the closest to Porto Alegre. A database can't
-      // be moved after it is created.
+      // Created by hand in Eastern North America (`wrangler d1 create
+      // orma-painel --location enam`): there is no South American region, and
+      // a database can't be moved once created. Pinned by ID, because without
+      // one Wrangler reuses whatever database the Worker was last attached to,
+      // or creates a new one wherever the build happens to run.
+      "database_id": "90ea6b4a-79aa-448e-a94a-4f32e662e643",
       "database_name": "orma-painel",
       "migrations_dir": "migrations",
     },

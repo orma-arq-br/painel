@@ -19,8 +19,8 @@ Cloudflare builds and publishes every push to `main` (Workers Builds, connected 
 
 Three things are set by hand, once:
 
-1. **The database**, before the first deploy: `pnpm exec wrangler d1 create orma-painel --location enam` (or in the dashboard under Storage & Databases → D1, location _Eastern North America_, the closest region to Porto Alegre). If it's missing, a deploy creates it in whatever region the build ran in, and it can't be moved later.
-2. **Secrets** (after the first deploy, once the Worker exists): in the Worker's **Settings → Variables and secrets**, add `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` (type _Secret_).
+1. **The database** already exists (`orma-painel`, in Eastern North America, the closest region to Porto Alegre) and is pinned by ID in `wrangler.jsonc`. If it ever has to be recreated: `pnpm exec wrangler d1 create orma-painel --location enam`, then put the new ID there.
+2. **Secrets** (after the first deploy, once the Worker exists): in the Worker's **Settings → Variables and Secrets** (the runtime section, not the one under Build), add `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` (type _Secret_).
 3. **Google OAuth client**: authorized redirect URIs `http://localhost:3000/auth/google/callback` and `https://painel.orma.arq.br/auth/google/callback`. Its consent screen links to https://orma.arq.br/painel/privacidade and https://orma.arq.br/painel/termos.
 
 To publish by hand instead: `pnpm build && pnpm release`.
