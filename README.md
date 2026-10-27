@@ -6,9 +6,12 @@ The private backoffice of [ORMA Arquitetura](https://orma.arq.br): TanStack Star
 
 ```sh
 pnpm install
-cp .dev.vars.example .dev.vars   # fill in the Google OAuth client
-pnpm dev                         # http://localhost:3000
+pnpm dev        # http://localhost:3000
 ```
+
+No keys needed: on the dev server the sign-in page has a button per team member that signs you straight in as them, without Google. Those buttons, and the route behind them, don't exist in the built panel.
+
+To try the real Google sign-in locally, `cp .dev.vars.example .dev.vars` and fill in the OAuth client; until then the Google button is shown switched off.
 
 ## Deploying
 

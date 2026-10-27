@@ -1,3 +1,4 @@
-# Copy to .dev.vars (never committed) for local development.
+# Optional. Only needed to try the real Google sign-in locally; the dev server
+# also offers a sign-in without Google. Copy to .dev.vars (never committed).
 GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=

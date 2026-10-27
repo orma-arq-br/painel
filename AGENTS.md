@@ -34,7 +34,7 @@ The package manager is **pnpm** (never npm or yarn). On the rare occasion a new 
 
 ### Logging in locally
 
-Google sign-in needs `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` in `.dev.vars` (see `.dev.vars.example`), with `http://localhost:3000/auth/google/callback` registered as a redirect URI on the OAuth client. To test signed-in screens without Google, insert a session into the local database (`sessions.id` is the SHA-256 hex of the cookie value) and send it as the `orma_session` cookie.
+No keys needed. On the dev server the sign-in page shows a button per person in `team` that signs in as them without Google (`src/routes/auth/dev.ts`; `import.meta.env.DEV` removes it from the built panel, where the route only answers 404). Use those to check signed-in screens, including in automated screenshots. The real Google sign-in additionally needs `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` in `.dev.vars` (see `.dev.vars.example`); without them the Google button is shown switched off. The dev server is pinned to port 3000, the address registered with Google.
 
 ### Git
 

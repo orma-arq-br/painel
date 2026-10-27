@@ -14,6 +14,7 @@ import { Route as EntrarRouteImport } from './routes/entrar'
 import { Route as SairRouteImport } from './routes/sair'
 import { Route as AppIndexRouteImport } from './routes/_app/index'
 import { Route as AppEquipeRouteImport } from './routes/_app/equipe'
+import { Route as AuthDevRouteImport } from './routes/auth/dev'
 import { Route as AuthGoogleRouteImport } from './routes/auth/google'
 import { Route as AuthGoogleCallbackRouteImport } from './routes/auth/google/callback'
 
@@ -41,6 +42,11 @@ const AppEquipeRoute = AppEquipeRouteImport.update({
   path: '/equipe',
   getParentRoute: () => AppRoute,
 } as any)
+const AuthDevRoute = AuthDevRouteImport.update({
+  id: '/auth/dev',
+  path: '/auth/dev',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthGoogleRoute = AuthGoogleRouteImport.update({
   id: '/auth/google',
   path: '/auth/google',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/entrar': typeof EntrarRoute
   '/sair': typeof SairRoute
   '/equipe': typeof AppEquipeRoute
+  '/auth/dev': typeof AuthDevRoute
   '/auth/google': typeof AuthGoogleRouteWithChildren
   '/auth/google/callback': typeof AuthGoogleCallbackRoute
 }
@@ -64,6 +71,7 @@ export interface FileRoutesByTo {
   '/entrar': typeof EntrarRoute
   '/sair': typeof SairRoute
   '/equipe': typeof AppEquipeRoute
+  '/auth/dev': typeof AuthDevRoute
   '/auth/google': typeof AuthGoogleRouteWithChildren
   '/': typeof AppIndexRoute
   '/auth/google/callback': typeof AuthGoogleCallbackRoute
@@ -74,6 +82,7 @@ export interface FileRoutesById {
   '/entrar': typeof EntrarRoute
   '/sair': typeof SairRoute
   '/_app/equipe': typeof AppEquipeRoute
+  '/auth/dev': typeof AuthDevRoute
   '/auth/google': typeof AuthGoogleRouteWithChildren
   '/_app/': typeof AppIndexRoute
   '/auth/google/callback': typeof AuthGoogleCallbackRoute
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
     | '/entrar'
     | '/sair'
     | '/equipe'
+    | '/auth/dev'
     | '/auth/google'
     | '/auth/google/callback'
   fileRoutesByTo: FileRoutesByTo
@@ -92,6 +102,7 @@ export interface FileRouteTypes {
     | '/entrar'
     | '/sair'
     | '/equipe'
+    | '/auth/dev'
     | '/auth/google'
     | '/'
     | '/auth/google/callback'
@@ -101,6 +112,7 @@ export interface FileRouteTypes {
     | '/entrar'
     | '/sair'
     | '/_app/equipe'
+    | '/auth/dev'
     | '/auth/google'
     | '/_app/'
     | '/auth/google/callback'
@@ -110,6 +122,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   EntrarRoute: typeof EntrarRoute
   SairRoute: typeof SairRoute
+  AuthDevRoute: typeof AuthDevRoute
   AuthGoogleRoute: typeof AuthGoogleRouteWithChildren
 }
 
@@ -149,6 +162,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/equipe'
       preLoaderRoute: typeof AppEquipeRouteImport
       parentRoute: typeof AppRoute
+    }
+    '/auth/dev': {
+      id: '/auth/dev'
+      path: '/auth/dev'
+      fullPath: '/auth/dev'
+      preLoaderRoute: typeof AuthDevRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/auth/google': {
       id: '/auth/google'
@@ -195,6 +215,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   EntrarRoute: EntrarRoute,
   SairRoute: SairRoute,
+  AuthDevRoute: AuthDevRoute,
   AuthGoogleRoute: AuthGoogleRouteWithChildren,
 }
 export const routeTree = rootRouteImport

@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
+import { redirectTo } from "../lib/redirect"
 import { endSession } from "../server/auth"
 
 /**
@@ -10,14 +11,10 @@ export const Route = createFileRoute("/sair")({
   server: {
     handlers: {
       // Typed or bookmarked by hand: nothing to do here, back to the start.
-      GET: () =>
-        new Response(null, { status: 302, headers: { Location: "/" } }),
+      GET: () => redirectTo("/"),
       POST: async () => {
         await endSession()
-        return new Response(null, {
-          status: 303,
-          headers: { Location: "/entrar" },
-        })
+        return redirectTo("/entrar", 303)
       },
     },
   },

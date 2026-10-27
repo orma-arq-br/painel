@@ -13,6 +13,16 @@ export const getCurrentUser = createServerFn({ method: "GET" }).handler(() =>
   validateSession(),
 )
 
+/**
+ * Which ways in this panel can offer. Public on purpose (the sign-in page
+ * needs it before anyone is signed in), and it only ever says yes or no.
+ */
+export const getSignInOptions = createServerFn({ method: "GET" }).handler(
+  () => ({
+    google: Boolean(env.GOOGLE_CLIENT_ID && env.GOOGLE_CLIENT_SECRET),
+  }),
+)
+
 const requireUser = createMiddleware({ type: "function" }).server(
   async ({ next }) => {
     const user = await validateSession()

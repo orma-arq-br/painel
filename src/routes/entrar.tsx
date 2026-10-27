@@ -1,7 +1,9 @@
 import { createFileRoute, redirect } from "@tanstack/react-router"
 import receptionPhoto from "../assets/photos/reception.jpg"
 import { Logo } from "../components/Logo"
+import { team } from "../config"
 import { pageTitle } from "../lib/title"
+import { getSignInOptions } from "../server/functions"
 import styles from "./entrar.module.css"
 
 const errors = {
@@ -20,12 +22,14 @@ export const Route = createFileRoute("/entrar")({
   beforeLoad: ({ context }) => {
     if (context.user) throw redirect({ to: "/" })
   },
+  loader: () => getSignInOptions(),
   head: () => ({ meta: [{ title: pageTitle("Entrar") }] }),
   component: SignIn,
 })
 
 function SignIn() {
   const { erro } = Route.useSearch()
+  const options = Route.useLoaderData()
 
   return (
     <main className={styles.page}>
@@ -44,11 +48,52 @@ function SignIn() {
           )}
 
           {/* A plain link, not a script: Google's page has to be a full
-              navigation anyway, and this works before anything has loaded. */}
-          <a className={styles.button} href="/auth/google">
-            <GoogleMark />
-            Entrar com Google
-          </a>
+              navigation anyway, and this works before anything has loaded.
+              Without the Google keys it would only lead to an error, so it
+              is shown switched off, with the reason underneath. */}
+          {options.google ? (
+            <a className={styles.button} href="/auth/google">
+              <GoogleMark />
+              Entrar com Google
+            </a>
+          ) : (
+            <>
+              <button
+                type="button"
+                className={styles.button}
+                disabled
+                aria-describedby="google-off"
+              >
+                <GoogleMark />
+                Entrar com Google
+              </button>
+              <p id="google-off" className={styles.note}>
+                O acesso pelo Google ainda não está configurado.
+              </p>
+            </>
+          )}
+
+          {/* Only on the dev server (see src/routes/auth/dev.ts): a way in
+              without Google's keys. Removed from the built panel entirely. */}
+          {import.meta.env.DEV && (
+            <form
+              method="post"
+              action="/auth/dev"
+              className={styles.dev}
+              aria-label="Entrar sem Google, só neste computador"
+            >
+              {team.map((member) => (
+                <button
+                  key={member.name}
+                  type="submit"
+                  name="conta"
+                  value={member.googleAccounts[0]}
+                >
+                  Entrar como {member.name.split(" ")[0]}
+                </button>
+              ))}
+            </form>
+          )}
         </div>
       </section>
 
