@@ -1,5 +1,5 @@
 import { createFileRoute, redirect } from "@tanstack/react-router"
-import receptionPhoto from "../assets/photos/reception.jpg"
+import closetPhoto from "../assets/photos/closet.webp"
 import { Logo } from "../components/Logo"
 import { team } from "../config"
 import { pageTitle } from "../lib/title"
@@ -99,8 +99,8 @@ function SignIn() {
 
       <figure className={styles.photo}>
         <img
-          src={receptionPhoto}
-          alt="Recepção com parede lilás, painel arqueado iluminado por trás em luz quente e balcão ripado branco"
+          src={closetPhoto}
+          alt="Closet com armários de madeira escura dos dois lados, tapete claro e, ao fundo, uma janela alta com cortina de linho e uma luminária circular acesa"
           fetchPriority="high"
         />
       </figure>
