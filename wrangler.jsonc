@@ -17,8 +17,14 @@
   "d1_databases": [
     {
       "binding": "DB",
-      // No database_id: the first `wrangler deploy` creates the database
-      // under this name, and every command after that finds it by name.
+      // Found by name, so no database_id. Created by hand once, BEFORE the
+      // first deploy, with `wrangler d1 create orma-painel --location enam`
+      // (or in the dashboard, choosing Eastern North America). If a deploy
+      // finds no database it creates one itself, but without a location hint,
+      // and Cloudflare then puts it wherever the build happened to run
+      // (it once landed in Asia Pacific). There is no South American region;
+      // Eastern North America is the closest to Porto Alegre. A database can't
+      // be moved after it is created.
       "database_name": "orma-painel",
       "migrations_dir": "migrations",
     },
