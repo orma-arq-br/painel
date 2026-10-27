@@ -1,0 +1,20 @@
+.shell {
+  min-block-size: 100svh;
+}
+
+.main {
+  inline-size: 100%;
+  max-inline-size: var(--content-max);
+  padding: var(--space-5) var(--edge) var(--space-6);
+}
+
+@media (min-width: 60rem) {
+  .shell {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  }
+
+  .main {
+    padding-block-start: var(--space-6);
+  }
+}

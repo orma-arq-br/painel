@@ -1,0 +1,152 @@
+/* --- phone: a header across the top, the pages in a row beneath it --- */
+.sidebar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--edge);
+  border-block-end: 1px solid var(--color-grey-2);
+  background: var(--color-paper);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.logo {
+  inline-size: 5.5rem;
+}
+
+.nav {
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+
+.nav ul {
+  display: flex;
+  gap: var(--space-4);
+  margin: 0;
+  overflow-x: auto;
+}
+
+/* The line under the current page, drawn in on hover for the others: the
+   same gesture as the public site's menu. */
+.nav a {
+  display: inline-block;
+  padding-block: var(--space-2);
+  font-size: var(--text-large);
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.nav a::after {
+  content: "";
+  display: block;
+  block-size: 1px;
+  margin-block-start: 0.2em;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--motion-fast) var(--ease-out-soft);
+}
+
+.nav a[aria-current="page"]::after,
+.nav a:hover::after,
+.nav a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* On the phone only "Sair" stays, top right; the rest is one tap away on
+   the site itself. */
+.foot {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.foot > a,
+.user {
+  display: none;
+}
+
+.signOut {
+  min-block-size: 2.75rem;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-grey-2);
+  background: none;
+  cursor: pointer;
+  transition: border-color var(--motion-fast) var(--ease-out-soft);
+}
+
+.signOut:hover {
+  border-color: var(--color-ink);
+}
+
+/* --- desktop: a column down the left that stays put --- */
+@media (min-width: 60rem) {
+  .sidebar {
+    position: sticky;
+    inset-block-start: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-6);
+    block-size: 100svh;
+    padding: var(--space-6) var(--space-4) var(--space-5);
+    border-block-end: none;
+    border-inline-end: 1px solid var(--color-grey-2);
+  }
+
+  .brand {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logo {
+    inline-size: 7.5rem;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .foot {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-block-start: auto;
+    font-size: var(--text-small);
+  }
+
+  .foot > a,
+  .user {
+    display: block;
+  }
+
+  .foot > a {
+    color: var(--color-grey-1);
+  }
+
+  .foot > a:hover {
+    color: var(--color-ink);
+  }
+
+  .user {
+    padding-block-start: var(--space-4);
+    border-block-start: 1px solid var(--color-grey-2);
+    inline-size: 100%;
+  }
+
+  /* An address too long for the column is cut short rather than broken
+     mid-word; the full one is in the tooltip. */
+  .user span {
+    display: block;
+    overflow: hidden;
+    color: var(--color-grey-1);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}

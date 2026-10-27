@@ -1,0 +1,6 @@
+dist/
+.wrangler/
+pnpm-lock.yaml
+.agents/
+worker-configuration.d.ts
+src/routeTree.gen.ts

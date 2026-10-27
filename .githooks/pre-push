@@ -1,0 +1,24 @@
+#!/bin/sh
+# Blocks a push when formatting or types are off. Runs on macOS, Linux, and
+# Windows (git runs hooks with its bundled sh there).
+
+echo "pre-push: checking formatting..."
+pnpm format:check || {
+  echo ""
+  echo "Formatting is off. Run 'pnpm format', commit the result, and push again."
+  exit 1
+}
+
+echo "pre-push: linting..."
+pnpm lint || {
+  echo ""
+  echo "'pnpm lint' failed. Fix the errors above and push again."
+  exit 1
+}
+
+echo "pre-push: checking types..."
+pnpm check || {
+  echo ""
+  echo "'pnpm check' (types) failed. Fix the errors above and push again."
+  exit 1
+}

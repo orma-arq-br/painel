@@ -1,0 +1,3 @@
+# Copy to .dev.vars (never committed) for local development.
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
