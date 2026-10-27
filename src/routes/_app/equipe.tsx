@@ -30,15 +30,21 @@ function Team() {
         <thead>
           <tr>
             <th scope="col">Nome</th>
-            <th scope="col">E-mail</th>
+            <th scope="col">Contas Google</th>
             <th scope="col">Último acesso</th>
           </tr>
         </thead>
         <tbody>
           {team.map((member) => (
-            <tr key={member.email}>
-              <td data-label="Nome">{member.name ?? "—"}</td>
-              <td data-label="E-mail">{member.email}</td>
+            <tr key={member.name}>
+              <td data-label="Nome">{member.name}</td>
+              <td data-label="Contas Google">
+                <ul role="list" className={styles.accounts}>
+                  {member.googleAccounts.map((email) => (
+                    <li key={email}>{email}</li>
+                  ))}
+                </ul>
+              </td>
               <td data-label="Último acesso">
                 {member.lastLoginAt
                   ? lastLogin.format(member.lastLoginAt * 1000)

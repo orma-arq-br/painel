@@ -1,7 +1,7 @@
 /**
  * Signing in with Google, and the logins that follow.
  *
- * Google proves who someone is; `allowedEmails` in src/config.ts decides
+ * Google proves who someone is; `team` in src/config.ts decides
  * whether they get in. A login is a random token in an HTTP-only cookie whose
  * SHA-256 is stored in D1, so it can be ended from the server at any time.
  *

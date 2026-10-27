@@ -26,7 +26,7 @@ The panel is the back room of the same studio as orma.arq.br, so it wears the sa
 
 ## Foundations — single source of truth
 
-- **`src/config.ts`** — studio facts and `allowedEmails`. Never hardcode either elsewhere.
+- **`src/config.ts`** — studio facts and `team` (who may sign in, with all their Google accounts). Never hardcode either elsewhere.
 - **`src/styles/global.css`** — every token (`--color-*`, `--text-*`, `--space-*`, `--edge`, `--sidebar-width`, `--content-max`, `--motion-*`), in cascade layers `reset, tokens, base`. Components use `var(--…)` — never raw colours, font sizes or magic spacing. A value needed twice becomes a token.
 - **A CSS Module next to each component or page** (`Sidebar.module.css`, `equipe.module.css`) for everything specific to it. Global classes only for the few true globals (`.eyebrow`, `.visually-hidden`).
 
@@ -49,4 +49,4 @@ The panel is the back room of the same studio as orma.arq.br, so it wears the sa
 
 _Record every decision she confirms here (date + one line), so future sessions never re-ask._
 
-- **2026-10-27** — First version: same palette, type and logo as orma.arq.br; a sidebar on the left on desktop, a header with the pages in a row on the phone. Sign-in with Google only, limited to the addresses in `allowedEmails`. The sign-in page uses the site's reception photograph (Consultório TH).
+- **2026-10-27** — First version: same palette, type and logo as orma.arq.br; a sidebar on the left on desktop, a header with the pages in a row on the phone. Sign-in with Google only, limited to the Google accounts listed in `team`. The sign-in page uses the site's reception photograph (Consultório TH).
