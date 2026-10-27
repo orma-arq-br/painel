@@ -1,6 +1,9 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "orma-painel",
+  // Must match the Worker project Cloudflare's GitHub integration deploys
+  // into. A different name makes every build publish a second Worker
+  // alongside it, one without the secrets set in the dashboard.
+  "name": "painel",
   "main": "@tanstack/react-start/server-entry",
   "compatibility_date": "2026-10-20",
   "compatibility_flags": ["nodejs_compat"],
