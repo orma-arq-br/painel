@@ -10,16 +10,18 @@ cp .dev.vars.example .dev.vars   # fill in the Google OAuth client
 pnpm dev                         # http://localhost:3000
 ```
 
-## First deploy (once, on the studio's Cloudflare account)
+## Deploying
 
-1. `pnpm exec wrangler login` with the studio's Cloudflare account.
-2. `pnpm exec wrangler d1 create orma-painel` and paste the `database_id` it prints into `wrangler.jsonc`.
-3. In Google Cloud console → APIs & Services → Credentials, create an **OAuth client ID** (type _Web application_) with these authorized redirect URIs:
-   - `http://localhost:3000/auth/google/callback`
-   - `https://painel.orma.arq.br/auth/google/callback`
-4. `pnpm exec wrangler secret put GOOGLE_CLIENT_ID` and `pnpm exec wrangler secret put GOOGLE_CLIENT_SECRET`.
-5. `pnpm deploy`. The panel is published at https://painel.orma.arq.br (the `orma.arq.br` zone must be on the same Cloudflare account).
+Cloudflare builds and publishes every push to `main` (Workers Builds, connected to this repository) at https://painel.orma.arq.br. In the Worker's **Settings → Build**:
 
-After that, `pnpm deploy` is all it takes: it builds, applies any new migrations to the real database, and publishes.
+- Build command: `pnpm build`
+- Deploy command: `pnpm release` (publishes, then applies any new migrations to the real database)
+
+The first deploy creates the `orma-painel` D1 database by itself. Two things are set by hand, once:
+
+1. **Secrets**: in the Worker's **Settings → Variables and secrets**, add `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` (type _Secret_).
+2. **Google OAuth client**: authorized redirect URIs `http://localhost:3000/auth/google/callback` and `https://painel.orma.arq.br/auth/google/callback`. Its consent screen links to https://orma.arq.br/painel/privacidade and https://orma.arq.br/painel/termos.
+
+To publish by hand instead: `pnpm build && pnpm release`.
 
 See `AGENTS.md` for how the project is organised and worked on.

@@ -22,7 +22,7 @@ The package manager is **pnpm** (never npm or yarn). On the rare occasion a new 
 
 - `pnpm dev` — regenerates the Cloudflare types, applies migrations to the local database, and serves on http://localhost:3000. Run it in the background. The server side runs in `workerd`, the same runtime as production, with a local D1 database under `.wrangler/`.
 - `pnpm check`, `pnpm lint`, `pnpm format` — types, lint, formatting. The pre-push hook runs all three.
-- `pnpm deploy` — builds, applies pending migrations to the real database, and publishes. Only when the work is verified.
+- **Deploys are automatic**: Cloudflare builds and publishes every push to `main` (`pnpm build`, then `pnpm release`, which publishes and applies new migrations to the real database). So only push verified work. Migrations run just after the new code goes live, so a migration must never break the code that is already running: add columns and tables, don't rename or drop them in the same push that stops using them.
 - After changing `wrangler.jsonc`, run `pnpm exec wrangler types` (the `Env` type is generated from it).
 
 ### Layout of the code

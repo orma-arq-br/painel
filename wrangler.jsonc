@@ -15,10 +15,9 @@
   "d1_databases": [
     {
       "binding": "DB",
+      // No database_id: the first `wrangler deploy` creates the database
+      // under this name, and every command after that finds it by name.
       "database_name": "orma-painel",
-      // Filled in by `wrangler d1 create orma-painel` on the studio's
-      // Cloudflare account. Local development works without it.
-      "database_id": "00000000-0000-0000-0000-000000000000",
       "migrations_dir": "migrations",
     },
   ],
