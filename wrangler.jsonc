@@ -1,19 +1,22 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "orma-backoffice",
+  "name": "orma-painel",
   "main": "@tanstack/react-start/server-entry",
   "compatibility_date": "2026-10-20",
   "compatibility_flags": ["nodejs_compat"],
   "observability": { "enabled": true },
   "upload_source_maps": true,
+  // Cloudflare creates the DNS record and certificate on deploy; orma.arq.br
+  // has to be a zone on the same Cloudflare account.
+  "routes": [{ "pattern": "painel.orma.arq.br", "custom_domain": true }],
   // From the Google Cloud console (APIs & Services → Credentials). Set with
   // `wrangler secret put` in production and in .dev.vars locally.
   "secrets": { "required": ["GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET"] },
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "orma-backoffice",
-      // Filled in by `wrangler d1 create orma-backoffice` on the studio's
+      "database_name": "orma-painel",
+      // Filled in by `wrangler d1 create orma-painel` on the studio's
       // Cloudflare account. Local development works without it.
       "database_id": "00000000-0000-0000-0000-000000000000",
       "migrations_dir": "migrations",

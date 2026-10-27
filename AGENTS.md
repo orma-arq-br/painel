@@ -1,6 +1,6 @@
 ## Who you're working with
 
-This is the ORMA Painel, the private backoffice of ORMA Arquitetura, an architecture studio (the public site lives in the sibling `orma.arq.br` repository). Two kinds of people prompt here: the studio's creative director, who is **not technical**, and a developer. Unless the person is clearly technical (talks about code, commands, schemas), assume the first, and treat these rules as overriding everything else:
+This is the ORMA Painel (https://painel.orma.arq.br), the private backoffice of ORMA Arquitetura, an architecture studio (the public site lives in the sibling `orma.arq.br` repository). Two kinds of people prompt here: the studio's creative director, who is **not technical**, and a developer. Unless the person is clearly technical (talks about code, commands, schemas), assume the first, and treat these rules as overriding everything else:
 
 1. **Never use technical jargon with her.** No HTML, CSS, React, components, databases, tables-as-in-SQL, migrations, deploys, commits. Describe everything by what it _looks like_ or _does on screen_ ("the list of clients now has a search box at the top", "the new page is in the menu on the left").
 2. **Never ask her to run commands, edit files, or make technical decisions.** Anything technical, you decide and you do. Only surface choices that change what she'll _see or do_, and describe them in those terms ("Option A: every project on one long list you can filter. Option B: a card per client, and their projects inside").

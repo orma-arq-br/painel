@@ -13,12 +13,12 @@ pnpm dev                         # http://localhost:3000
 ## First deploy (once, on the studio's Cloudflare account)
 
 1. `pnpm exec wrangler login` with the studio's Cloudflare account.
-2. `pnpm exec wrangler d1 create orma-backoffice` and paste the `database_id` it prints into `wrangler.jsonc`.
+2. `pnpm exec wrangler d1 create orma-painel` and paste the `database_id` it prints into `wrangler.jsonc`.
 3. In Google Cloud console → APIs & Services → Credentials, create an **OAuth client ID** (type _Web application_) with these authorized redirect URIs:
    - `http://localhost:3000/auth/google/callback`
-   - `https://<the panel's address>/auth/google/callback`
+   - `https://painel.orma.arq.br/auth/google/callback`
 4. `pnpm exec wrangler secret put GOOGLE_CLIENT_ID` and `pnpm exec wrangler secret put GOOGLE_CLIENT_SECRET`.
-5. `pnpm deploy`. Then, in the Cloudflare dashboard, attach a custom domain to the `orma-backoffice` Worker.
+5. `pnpm deploy`. The panel is published at https://painel.orma.arq.br (the `orma.arq.br` zone must be on the same Cloudflare account).
 
 After that, `pnpm deploy` is all it takes: it builds, applies any new migrations to the real database, and publishes.
 
